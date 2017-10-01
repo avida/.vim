@@ -16,7 +16,8 @@ autocmd FileType make setlocal noexpandtab
 autocmd BufRead,BufNewFile *.py setlocal ts=4 sw=4 sts=4
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-map m :call cursor(0, virtcol('$')/2)<CR>
+map m :call cursor(0, virtcol('.') + (virtcol('$') - virtcol('.'))/2)<CR>
+map M :call cursor(0, virtcol('.') / 2)<CR>
 
 noremap <Up> <Nop>
 noremap <Down> <Nop>
