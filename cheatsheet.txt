@@ -1,0 +1,4 @@
+fstab entries:
+
+192.168.1.115:/home/dima/union/fuse /mnt/nfs nfs auto,user=guest,nolock,ro 0 1
+/dev/sda1   /mnt/music  vfat   iocharset=utf8,auto,rw,uid=1000,gid=1000 0 0
