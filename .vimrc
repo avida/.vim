@@ -25,21 +25,21 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 
 " Pathogen plugin config
-" https://github.com/tpope/vim-pathogen.git
+"https://github.com/tpope/vim-pathogen.git
 execute pathogen#infect()
 
 set wildignore+=*/dist/*    " MacOSX/Linux
 set wildignore+=*.o    " MacOSX/Linux
 
 " Tagbar settings
-" https://github.com/majutsushi/tagbar.git
+"git https://github.com/majutsushi/tagbar.git
 nmap <C-T> :TagbarToggle<CR>
 
 " Controlp settings
-" https://github.com/ctrlpvim/ctrlp.vim.git
+"git https://github.com/ctrlpvim/ctrlp.vim.git
 
 " git fugitive settings
-" git://github.com/tpope/vim-fugitive.git
+"git  git://github.com/tpope/vim-fugitive.git
 
 " NerdTree settings
-" https://github.com/scrooloose/nerdtree.git
+"git https://github.com/scrooloose/nerdtree.git
