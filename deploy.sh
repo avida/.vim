@@ -34,9 +34,18 @@ for i in $REPOS
    done
 ;;
 "raspi")
+echo "Installing python packages"
 pip3 install $PIP_RASPI
+echo "Installin application from linux repository"
 $PACKAGE_MGR $PI_PACKAGE_LIST
-
+echo "Installing pynrf24 lib"
+git clone https://github.com/jpbarraca/pynrf24.git pynrf24
+pushd pynrf24
+python3 setup.py install
+popd
+rm -rf pynrf24
+echo "Done"
+;;
 *)
 echo "default"
 ;;
