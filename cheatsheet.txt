@@ -2,3 +2,22 @@ fstab entries:
 
 192.168.1.115:/home/dima/union/fuse /mnt/nfs nfs auto,user=guest,nolock,ro 0 1
 /dev/sda1   /mnt/music  vfat   iocharset=utf8,auto,rw,uid=1000,gid=1000 0 0
+
+To encrypt files with gpg and passphrace:
+   	gpg -c filename
+
+Generate ssh keys with openssl:
+
+rsa key:
+generating private key:
+	openssl genrsa -out key.pem 2048
+getting public key:
+	openssl rsa -in key.pem -outform PEM -pubout -out public.pem
+
+ellyptic curves key:
+	openssl ecparam -name prime256v1 -genkey -noout -out key.pem
+getting public key:
+	openssl ec -in key.pem -pubout -out public.pem
+
+To generate openssh format public key from the private key:
+	ssh-keygen -f key.pem -y > key.pub
