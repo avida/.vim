@@ -1,0 +1,7 @@
+[alias]
+   co = checkout
+   st = status
+   db = branch -D
+   cb = checkout -b
+[core]
+   editor = vim

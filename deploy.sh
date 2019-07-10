@@ -49,6 +49,13 @@ function setup_keys {
    popd
 }
 
+function setup_git {
+cat << EOF >> $HOME/.gitconfig
+[include]
+   path = `pwd`/gitconfig
+EOF
+}
+
 function base_install {
    echo "Installing base packages"
    sudo bash -c "$PACKAGE_MGR $PACKAGE_LIST"
@@ -82,7 +89,8 @@ function process_actions {
       ;;
       config)
          setup_keys
-         #setup_vim
+         setup_vim
+         setup_git
       ;;
       *)
          echo "Unknown action $action"
@@ -92,7 +100,7 @@ function process_actions {
 }
 
 function main {
-   while getopts "a:vch" opt
+   while getopts "a:h" opt
    do
       case $opt in
       h)
