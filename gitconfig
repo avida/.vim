@@ -3,5 +3,6 @@
    st = status
    db = branch -D
    cb = checkout -b
+   amend = commit -a --amend
 [core]
    editor = vim
