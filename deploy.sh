@@ -4,7 +4,7 @@ test -z ${DEBUG+x} || {
    set -x
 }
 
-PACKAGE_LIST="tmux vim git python3 python3-pip"
+PACKAGE_LIST="tmux vim git python3 python3-pip curl"
 
 PI_PACKAGE_LIST="wiringpi"
 PYTHON_PACKAGES="flask flask_socketio plumbum"
@@ -14,7 +14,11 @@ PACKAGE_MGR="apt update; apt-get install -y"
 function usage {
    echo "Deploy script for setting up system config
    Options:
-    -a type of action for setting up environment. Could be raspi, base or config. You can use it multiple times.
+    -a Type of action for setting up environment. Could be raspi, base or config. You can use it multiple times.
+       Possible actions are: raspi, base, config, docker
+       For example use this on your fresh system:
+         ./deploy.sh -a base -a config -a docker
+    -h Print this help
    "
    exit 0
 }
@@ -56,6 +60,16 @@ cat << EOF >> $HOME/.gitconfig
 EOF
 }
 
+function install_docker {
+   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+   sudo add-apt-repository \
+      "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+      $(lsb_release -cs) stable"
+   sudo bash -c "$PACKAGE_MGR docker-ce docker-ce-cli containerd.io"
+   sudo usermod -aG docker `id -un`
+
+}
+
 function base_install {
    echo "Installing base packages"
    sudo bash -c "$PACKAGE_MGR $PACKAGE_LIST"
@@ -91,6 +105,9 @@ function process_actions {
          setup_keys
          setup_vim
          setup_git
+      ;;
+      docker)
+         install_docker
       ;;
       *)
          echo "Unknown action $action"
