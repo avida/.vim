@@ -6,3 +6,6 @@
    amend = commit -a --amend
 [core]
    editor = vim
+[user]
+	email = avida.d3@gmail.com
+	name = Dmytro
