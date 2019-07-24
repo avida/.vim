@@ -5,6 +5,7 @@ test -z ${DEBUG+x} || {
 }
 
 PACKAGE_LIST="tmux vim git python3 python3-pip curl"
+PYENV_PACKAGES="zlib1g-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils liblzma-dev python3-venv"
 
 PI_PACKAGE_LIST="wiringpi"
 PYTHON_PACKAGES="flask flask_socketio plumbum"
@@ -17,7 +18,7 @@ function usage {
     -a Type of action for setting up environment. Could be raspi, base or config. You can use it multiple times.
        Possible actions are: raspi, base, config, docker
        For example use this on your fresh system:
-         ./deploy.sh -a base -a config -a docker
+         ./deploy.sh -a base -a config -a docker -a pyenv
     -h Print this help
    "
    exit 0
@@ -54,10 +55,10 @@ function setup_keys {
 }
 
 function setup_git {
-cat << EOF >> $HOME/.gitconfig
+   cat <<<'
 [include]
-   path = `pwd`/gitconfig
-EOF
+path = `pwd`/gitconfig
+' >> $HOME/.gitconfig
 }
 
 function install_docker {
@@ -68,6 +69,16 @@ function install_docker {
    sudo bash -c "$PACKAGE_MGR docker-ce docker-ce-cli containerd.io"
    sudo usermod -aG docker `id -un`
 
+}
+
+function install_pyenv {
+   sudo bash -c "$PACKAGE_MGR $PYENV_PACKAGES"
+   curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+   cat <<< '
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+' >> $HOME/.bashrc
 }
 
 function base_install {
@@ -108,6 +119,9 @@ function process_actions {
       ;;
       docker)
          install_docker
+      ;;
+      pyenv)
+         install_pyenv
       ;;
       *)
          echo "Unknown action $action"
