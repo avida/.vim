@@ -55,10 +55,12 @@ function setup_keys {
 }
 
 function setup_git {
-   cat <<<'
+   cat <<<"
 [include]
 path = `pwd`/gitconfig
-' >> $HOME/.gitconfig
+" >> $HOME/.gitconfig
+   git remote rm origin
+   git remote add origin git@github.com:avida/.vim.git
 }
 
 function install_docker {
