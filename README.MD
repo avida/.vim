@@ -1,6 +1,5 @@
 Setup configs for fresh system
 ```
-git clone https://github.com/avida/.vim.git
-cd .vim
-./deploy.sh -a config
+wget  https://raw.githubusercontent.com/avida/.vim/master/initial_deploy.sh -O - | bash
+./deploy.sh -a base -a config
 ```
