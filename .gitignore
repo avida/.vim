@@ -1,0 +1,5 @@
+autoload/
+bundle/
+vim-pathogen/
+*swp
+

@@ -4,7 +4,7 @@ test -z ${DEBUG+x} || {
    set -x
 }
 
-PACKAGE_LIST="tmux vim git python3 python3-pip curl"
+PACKAGE_LIST="tmux vim git python3 python3-pip python3-setuptools curl"
 PYENV_PACKAGES="zlib1g-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils liblzma-dev python3-venv"
 
 PI_PACKAGE_LIST="wiringpi"
