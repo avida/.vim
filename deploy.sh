@@ -65,10 +65,14 @@ path = `pwd`/gitconfig
 
 function install_docker {
    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-   sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+   echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(. /etc/os-release; echo "$UBUNTU_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker_ce.list
    sudo bash -c "$PACKAGE_MGR docker-ce docker-ce-cli containerd.io"
    sudo usermod -aG docker `id -un`
+}
 
+function install_docker_compose {
+   sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+   sudo chmod +x /usr/local/bin/docker-compose
 }
 
 function install_pyenv {
@@ -119,6 +123,9 @@ function process_actions {
       ;;
       docker)
          install_docker
+      ;;
+      docker-compose)
+         install_docker_compose
       ;;
       pyenv)
          install_pyenv
