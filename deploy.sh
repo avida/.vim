@@ -5,7 +5,7 @@ test -z ${DEBUG+x} || {
 }
 
 PACKAGE_LIST="tmux vim git python3 python3-pip python3-setuptools curl"
-PYENV_PACKAGES="zlib1g-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils liblzma-dev python3-venv"
+PYENV_PACKAGES="zlib1g-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils liblzma-dev python3-venv libffi-dev"
 
 PI_PACKAGE_LIST="wiringpi"
 PYTHON_PACKAGES="flask flask_socketio plumbum"
@@ -65,9 +65,7 @@ path = `pwd`/gitconfig
 
 function install_docker {
    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-   sudo add-apt-repository \
-      "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-      $(lsb_release -cs) stable"
+   sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
    sudo bash -c "$PACKAGE_MGR docker-ce docker-ce-cli containerd.io"
    sudo usermod -aG docker `id -un`
 

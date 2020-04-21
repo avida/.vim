@@ -1,6 +1,6 @@
 which git > /dev/null || {
    sudo apt update
-   sudo apt install git
+   sudo apt -y install git
 }
 git clone https://github.com/avida/.vim.git
 cd .vim
