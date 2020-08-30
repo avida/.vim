@@ -1,6 +1,8 @@
 set cursorcolumn 
 set cursorline 
 set number
+set relativenumber
+
 syntax on
 set hlsearch
 set incsearch
