@@ -70,3 +70,7 @@ autocmd BufRead,BufNewFile .vimrc setlocal commentstring=\"\ %s
 noremap <F3> :Autoformat<CR>
 "git https://github.com/yggdroot/indentline
 " let g:indentLine_enabled = 0
+
+"git https://github.com/mileszs/ack.vim.git ~/.vim/bundle/ack.vim
+vnoremap <C-A>a y:Ack <C-r>=fnameescape(@")<CR><CR>
+noremap <C-A> :Ack <cword><cr>
