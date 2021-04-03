@@ -68,3 +68,5 @@ autocmd BufRead,BufNewFile .vimrc setlocal commentstring=\"\ %s
 
 "git https://github.com/Chiel92/vim-autoformat.git
 noremap <F3> :Autoformat<CR>
+"git https://github.com/yggdroot/indentline
+" let g:indentLine_enabled = 0
