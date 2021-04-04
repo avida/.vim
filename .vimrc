@@ -25,6 +25,7 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+noremap Q <Nop>
 
 " Pathogen plugin config
 "https://github.com/tpope/vim-pathogen.git
@@ -74,3 +75,14 @@ noremap <F3> :Autoformat<CR>
 "git https://github.com/mileszs/ack.vim.git ~/.vim/bundle/ack.vim
 vnoremap <C-A>a y:Ack <C-r>=fnameescape(@")<CR><CR>
 noremap <C-A> :Ack <cword><cr>
+
+"git https://github.com/honza/vim-snippets
+"git https://github.com/garbas/vim-snipmate
+"git https://github.com/MarcWeber/vim-addon-mw-utils.git
+"git https://github.com/tomtom/tlib_vim.git
+let g:snipMate = { 'snippet_version' : 1 }
+
+"git https://github.com/mg979/vim-visual-multi.git
+let g:VM_maps = {}
+let g:VM_maps["Select Cursor Down"] = '<C-j>'
+let g:VM_maps["Select Cursor Up"]   = '<C-k>'
