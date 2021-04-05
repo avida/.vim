@@ -63,6 +63,11 @@ path = `pwd`/gitconfig
    git remote add origin git@github.com:avida/.vim.git
 }
 
+function setup_tools {
+   echo 'source "$HOME/.vim/bashrc"' >> $HOME/.bashrc
+   ln -s ~/.vim/tmux.conf ~/.tmux.conf
+}
+
 function install_docker {
    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
    echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(. /etc/os-release; echo "$UBUNTU_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker_ce.list
@@ -123,6 +128,7 @@ function process_actions {
          setup_keys
          setup_vim
          setup_git
+         setup_tools
       ;;
       docker)
          install_docker
