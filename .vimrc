@@ -43,7 +43,10 @@ nmap <C-T> :TagbarToggle<CR>
 let g:ctrlp_custom_ignore = 'node_modules\|.git\|__pycache__'
 
 " git fugitive settings
-"git  git://github.com/tpope/vim-fugitive.git
+"git git://github.com/tpope/vim-fugitive.git
+"git https://github.com/mattn/vim-gist.git
+let g:github_user = 'avida'
+"git https://github.com/mattn/webapi-vim
 
 " NerdTree settings
 "git https://github.com/scrooloose/nerdtree.git
