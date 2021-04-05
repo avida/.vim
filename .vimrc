@@ -25,6 +25,7 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+noremap Q <Nop>
 
 " Pathogen plugin config
 "https://github.com/tpope/vim-pathogen.git
@@ -67,13 +68,13 @@ autocmd BufRead,BufNewFile .vimrc setlocal commentstring=\"\ %s
 "git https://github.com/godlygeek/tabular
 
 "git https://github.com/Chiel92/vim-autoformat.git
-noremap <F3> :Autoformat<CR>
+noremap <F4> :Autoformat<CR>
 "git https://github.com/yggdroot/indentline
 " let g:indentLine_enabled = 0
 
 "git https://github.com/mileszs/ack.vim.git ~/.vim/bundle/ack.vim
-vnoremap Q a y:Ack <C-r>=fnameescape(@")<CR><CR>
-noremap Q :Ack <cword><cr>
+vnoremap <C-A> y:Ack "<C-r>=escape(fnameescape(@"), '()')<cr>"<cr>
+noremap <F3> :Ack <cword><cr>
 
 "git https://github.com/honza/vim-snippets
 "git https://github.com/garbas/vim-snipmate
