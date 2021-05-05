@@ -1,9 +1,12 @@
-test "$0" = "bash" && {
+SHELL=$(readlink /proc/$$/exe)
+
+test "$SHELL" = "/bin/bash" && {
    [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 }
 
-test "$0" = "zsh" && {
-source $HOME/.fzf/shell/key-bindings.zsh
+test "$SHELL" = "/bin/zsh" && {
+   source $HOME/.fzf/shell/key-bindings.zsh
+   export ZSH_THEME="jonathan"
 }
 
 alias tmux="TERM=screen-256color-bce tmux"
