@@ -65,6 +65,9 @@ path = `pwd`/gitconfig
 
 function setup_tools {
    echo 'source "$HOME/.vim/bashrc"' >> $HOME/.bashrc
+   which zsh && {
+      echo 'source "$HOME/.vim/bashrc"' >> $HOME/.zshrc
+   }
    ln -s ~/.vim/tmux.conf ~/.tmux.conf
 }
 
