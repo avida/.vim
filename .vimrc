@@ -61,6 +61,8 @@ let g:github_user = 'avida'
 
 " Comments in vim, gc and gcc command
 autocmd FileType python setlocal commentstring=#\ %s
+autocmd FileType sh setlocal commentstring=#\ %s
+autocmd FileType bash setlocal commentstring=#\ %s
 autocmd BufRead,BufNewFile .vimrc setlocal commentstring=\"\ %s
 "git https://github.com/tpope/vim-commentary
 
@@ -89,3 +91,5 @@ let g:snipMate = { 'snippet_version' : 1 }
 let g:VM_maps = {}
 let g:VM_maps["Select Cursor Down"] = '<C-j>'
 let g:VM_maps["Select Cursor Up"]   = '<C-k>'
+
+"git https://github.com/szw/vim-g.git
