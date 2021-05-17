@@ -86,11 +86,6 @@ function install_docker_compose {
 function install_pyenv {
    sudo bash -c "$PACKAGE_MGR $PYENV_PACKAGES"
    curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
-   cat <<< '
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-' >> $HOME/.bashrc
 }
 
 function base_install {
