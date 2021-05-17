@@ -2,4 +2,5 @@ autoload/
 bundle/
 vim-pathogen/
 *swp
+secrets/*
 

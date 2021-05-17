@@ -4,6 +4,9 @@ test -z ${DEBUG+x} || {
    set -x
 }
 
+SECRETS_ENC_FN="secrets.gpg"
+SECRETS_TMP_DIR="secrets"
+
 PACKAGE_LIST="tmux vim git python3 python3-pip python3-setuptools curl"
 PYENV_PACKAGES="zlib1g-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils liblzma-dev python3-venv libffi-dev"
 
@@ -27,7 +30,7 @@ function usage {
 function setup_vim {
    echo "installing vim plugins"
    ln -s ~/.vim/.vimrc ~/.vimrc
-   git clone https://github.com/tpope/vim-pathogen.git
+   git clone ettps://github.com/tpope/vim-pathogen.git
    mv vim-pathogen/autoload ./
    mkdir -p bundle
    REPOS=$(awk '{if ($1 == "\"git") print $2}' .vimrc)
@@ -42,11 +45,11 @@ function setup_vim {
 function setup_keys {
    echo "installing ssh keys"
    mkdir -p $HOME/.ssh
-   gpg  key.pem.gpg || {
+   unpack_secrets || {
       echo "Hint: password is c*********9"
       exit 1
    }
-   mv key.pem $HOME/.ssh/id_ecdsa
+   mv $SECRETS_TMP_DIR/key.pem $HOME/.ssh/id_ecdsa
    chmod 600 $HOME/.ssh/id_ecdsa
 	ssh-keygen -f $HOME/.ssh/id_ecdsa -y > $HOME/.ssh/id_ecdsa.pub
    pushd $HOME/.ssh
@@ -111,6 +114,14 @@ function raspi_install {
    rm -rf pynrf24
 }
 
+function unpack_secrets {
+   gpg -d $SECRETS_ENC_FN | tar xf -
+}
+
+function pack_secrets {
+   tar cf - $SECRETS_TMP_DIR/ | gpg --symmetric -o $SECRETS_ENC_FN
+}
+
 function process_actions {
    for action in ${ACTIONS[@]}
    do
@@ -136,6 +147,9 @@ function process_actions {
       ;;
       pyenv)
          install_pyenv
+      ;;
+      pack-secrets)
+         pack_secrets
       ;;
       *)
          echo "Unknown action $action"
