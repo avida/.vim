@@ -68,7 +68,7 @@ function setup_tools {
    which zsh && {
       echo 'source "$HOME/.vim/bashrc"' >> $HOME/.zshrc
    }
-   ln -s ~/.vim/tmux.conf ~/.tmux.conf
+   ln -sf ~/.vim/tmux.conf ~/.tmux.conf
 }
 
 function install_docker {
