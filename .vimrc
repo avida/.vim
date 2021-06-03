@@ -63,6 +63,7 @@ let g:github_user = 'avida'
 autocmd FileType python setlocal commentstring=#\ %s
 autocmd FileType sh setlocal commentstring=#\ %s
 autocmd FileType bash setlocal commentstring=#\ %s
+autocmd FileType tf setlocal commentstring=#\ %s
 autocmd BufRead,BufNewFile .vimrc setlocal commentstring=\"\ %s
 "git https://github.com/tpope/vim-commentary
 

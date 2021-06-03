@@ -151,6 +151,10 @@ function process_actions {
       pack-secrets)
          pack_secrets
       ;;
+      append-secrets)
+         unpack_secrets
+         pack_secrets
+      ;;
       *)
          echo "Unknown action $action"
       ;;
