@@ -151,6 +151,9 @@ function process_actions {
       pack-secrets)
          pack_secrets
       ;;
+      unpack-secrets)
+         unpack_secrets
+      ;;
       append-secrets)
          unpack_secrets
          pack_secrets

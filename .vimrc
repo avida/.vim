@@ -33,6 +33,7 @@ execute pathogen#infect()
 
 set wildignore+=*/dist/*    " MacOSX/Linux
 set wildignore+=*.o    " MacOSX/Linux
+set noswapfile
 
 " Tagbar settings
 "git https://github.com/majutsushi/tagbar.git
