@@ -9,10 +9,12 @@ test "$SHELL" = "/bin/zsh" && {
    export ZSH_THEME="jonathan"
 }
 
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init --path)"
+
 
 alias tmux="TERM=screen-256color-bce tmux"
 alias tb='nc termbin.com 9999'
