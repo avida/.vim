@@ -42,6 +42,7 @@ nmap <C-T> :TagbarToggle<CR>
 " Controlp settings
 "git https://github.com/ctrlpvim/ctrlp.vim.git
 let g:ctrlp_custom_ignore = 'node_modules\|.git\|__pycache__'
+set wildignore+=cdk.out
 
 " git fugitive settings
 "git git://github.com/tpope/vim-fugitive.git
@@ -76,6 +77,8 @@ autocmd BufRead,BufNewFile .vimrc setlocal commentstring=\"\ %s
 
 "git https://github.com/Chiel92/vim-autoformat.git
 noremap <F4> :Autoformat<CR>
+let g:formatters_python = ['black']
+
 "git https://github.com/yggdroot/indentline
 " let g:indentLine_enabled = 0
 
