@@ -7,6 +7,7 @@ test "$SHELL" = "/bin/bash" && {
 test "$SHELL" = "/bin/zsh" && {
    source $HOME/.fzf/shell/key-bindings.zsh
    export ZSH_THEME="jonathan"
+   export DISABLE_UNTRACKED_FILES_DIRTY="true"
 }
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
