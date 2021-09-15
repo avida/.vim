@@ -30,7 +30,7 @@ function usage {
 function setup_vim {
    echo "installing vim plugins"
    ln -s ~/.vim/.vimrc ~/.vimrc
-   git clone ettps://github.com/tpope/vim-pathogen.git
+   git clone https://github.com/tpope/vim-pathogen.git
    mv vim-pathogen/autoload ./
    mkdir -p bundle
    REPOS=$(awk '{if ($1 == "\"git") print $2}' .vimrc)
@@ -49,7 +49,7 @@ function setup_keys {
       echo "Hint: password is c*********9"
       exit 1
    }
-   mv $SECRETS_TMP_DIR/key.pem $HOME/.ssh/id_ecdsa
+   mv $SECRETS_TMP_DIR/id_ecdsa $HOME/.ssh/
    chmod 600 $HOME/.ssh/id_ecdsa
 	ssh-keygen -f $HOME/.ssh/id_ecdsa -y > $HOME/.ssh/id_ecdsa.pub
    pushd $HOME/.ssh
@@ -122,6 +122,11 @@ function pack_secrets {
    tar cf - $SECRETS_TMP_DIR/ | gpg --symmetric -o $SECRETS_ENC_FN
 }
 
+function install_node {
+   curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+   sudo apt-get install -y nodejs
+}
+
 function process_actions {
    for action in ${ACTIONS[@]}
    do
@@ -147,6 +152,9 @@ function process_actions {
       ;;
       pyenv)
          install_pyenv
+      ;;
+      node)
+         install_node
       ;;
       pack-secrets)
          pack_secrets
