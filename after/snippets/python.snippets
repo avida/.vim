@@ -7,3 +7,9 @@ snippet prop
 	def $1(self, value):
 		self._$1 = value
 
+snippet fix
+	@fixture
+	def ${1:name}():
+		return None
+
+

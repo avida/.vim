@@ -24,3 +24,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias tf='terraform'
+
+alias cov='coverage run -m pytest -s unit_tests && coverage  html --omit="*/.pyenv/*" && firefox htmlcov/index.html'
+alias lab="cd ~/jupyter;pyenv activate 38;jupyter-lab"
+alias git="SKIP=mypy git"
