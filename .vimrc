@@ -80,7 +80,7 @@ noremap <F4> :Autoformat<CR>
 let g:formatters_python = ['black']
 
 "git https://github.com/yggdroot/indentline
-" let g:indentLine_enabled = 0
+let g:indentLine_enabled = 0
 
 "git https://github.com/mileszs/ack.vim.git ~/.vim/bundle/ack.vim
 vnoremap <C-A> y:Ack "<C-r>=escape(fnameescape(@"), '()')<cr>"<cr>
