@@ -127,6 +127,16 @@ function install_node {
    sudo apt-get install -y nodejs
 }
 
+function install_neovim {
+   wget https://github.com/neovim/neovim/releases/download/v0.6.0/nvim.appimage
+   chmod +x nvim.appimage
+   ./nvim.appimage --appimage-extract
+   pushd squashfs-root
+   sudo cp -r usr /
+   popd
+   rm -r nvim.appimage squashfs-root
+}
+
 function process_actions {
    for action in ${ACTIONS[@]}
    do
@@ -165,6 +175,9 @@ function process_actions {
       append-secrets)
          unpack_secrets
          pack_secrets
+      ;;
+      neovim)
+         install_neovim
       ;;
       *)
          echo "Unknown action $action"
