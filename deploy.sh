@@ -7,7 +7,7 @@ test -z ${DEBUG+x} || {
 SECRETS_ENC_FN="secrets.gpg"
 SECRETS_TMP_DIR="secrets"
 
-PACKAGE_LIST="tmux vim git python3 python3-pip python3-setuptools curl"
+PACKAGE_LIST="tmux vim git python3 python3-pip python3-setuptools curl zsh"
 PYENV_PACKAGES="zlib1g-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils liblzma-dev python3-venv libffi-dev"
 
 PI_PACKAGE_LIST="wiringpi"
@@ -69,6 +69,7 @@ path = `pwd`/gitconfig
 function setup_tools {
    echo 'source "$HOME/.vim/bashrc"' >> $HOME/.bashrc
    which zsh && {
+      sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
       echo 'source "$HOME/.vim/bashrc"' >> $HOME/.zshrc
    }
    ln -sf ~/.vim/tmux.conf ~/.tmux.conf
