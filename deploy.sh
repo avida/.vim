@@ -135,6 +135,11 @@ function install_neovim {
    sudo cp -r usr /
    popd
    rm -r nvim.appimage squashfs-root
+   mkdir -p $HOME/.config/nvim/
+   echo "set runtimepath^=$HOME/.vim runtimepath+=$HOME/.vim/after
+let &packpath=&runtimepath
+source $HOME/.vimrc
+" >> ~/.config/nvim/init.vim
 }
 
 function process_actions {
