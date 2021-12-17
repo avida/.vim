@@ -138,6 +138,11 @@ function install_neovim {
    ln -sf $HOME/.vim/init.vim ~/.config/nvim/init.vim
 }
 
+function install_alacritty {
+   sudo bash -c "$PACKAGE_MGR cargo cmake libfontconfig-dev libxcb1-dev libxcb-shape0-dev libxcb-xfixes0-dev"
+   cargo install alacritty
+}
+
 function process_actions {
    for action in ${ACTIONS[@]}
    do
@@ -179,6 +184,9 @@ function process_actions {
       ;;
       neovim)
          install_neovim
+      ;;
+      alacritty)
+         install_alacritty
       ;;
       *)
          echo "Unknown action $action"
