@@ -30,16 +30,13 @@ function usage {
 function setup_vim {
    echo "installing vim plugins"
    ln -s ~/.vim/.vimrc ~/.vimrc
+   # install pathogen
    git clone https://github.com/tpope/vim-pathogen.git
    mv vim-pathogen/autoload ./
    mkdir -p bundle
-   REPOS=$(awk '{if ($1 == "\"git") print $2}' .vimrc)
-   pushd bundle
-   for i in $REPOS
-      do
-         git clone $i
-      done
-   popd
+   # install vim-plug
+   curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+   # To install plugins run PlugInstall command in vim command mode
 }
 
 function setup_keys {
@@ -137,10 +134,8 @@ function install_neovim {
    popd
    rm -r nvim.appimage squashfs-root
    mkdir -p $HOME/.config/nvim/
-   echo "set runtimepath^=$HOME/.vim runtimepath+=$HOME/.vim/after
-let &packpath=&runtimepath
-source $HOME/.vimrc
-" >> ~/.config/nvim/init.vim
+
+   ln -sf $HOME/.vim/init.vim ~/.config/nvim/init.vim
 }
 
 function process_actions {

@@ -1,13 +1,14 @@
 SHELL=$(readlink /proc/$$/exe)
 
-test "$SHELL" = "/bin/bash" && {
+test `basename $SHELL` = "bash" && {
    [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 }
 
-test "$SHELL" = "/bin/zsh" && {
+test `basename $SHELL` = "zsh" && {
    source $HOME/.fzf/shell/key-bindings.zsh
    export ZSH_THEME="jonathan"
    export DISABLE_UNTRACKED_FILES_DIRTY="true"
+   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 }
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
@@ -29,3 +30,4 @@ alias tf='terraform'
 alias cov='coverage run -m pytest -s unit_tests && coverage  html --omit="*/.pyenv/*" --omit="*/.local/*" && firefox htmlcov/index.html'
 alias lab="cd ~/jupyter;pyenv activate 38;jupyter-lab"
 alias git="SKIP=mypy git"
+alias v=nvim
