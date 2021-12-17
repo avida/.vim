@@ -121,7 +121,7 @@ function pack_secrets {
 }
 
 function install_node {
-   curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+   curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
    sudo apt-get install -y nodejs
 }
 
