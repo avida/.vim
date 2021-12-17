@@ -47,13 +47,13 @@ function process_actions {
    for action in ${ACTIONS[@]}
    do
       case $action in
-      pack-secrets)
+      secrets-unpack)
 k        pack_secrets
       ;;
-      unpack-secrets)
+      secrets-pack)
          unpack_secrets
       ;;
-      append-secrets)
+      secrets-update)
          unpack_secrets
          pack_secrets
       ;;
