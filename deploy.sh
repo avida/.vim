@@ -15,6 +15,8 @@ PYTHON_PACKAGES="flask flask_socketio plumbum"
 PIP_RASPI="spidev RPi.GPIO redis rq"
 
 PACKAGE_MGR="apt update; apt-get install -y"
+ACTIONS_DIR="actions"
+
 function usage {
    echo "Deploy script for setting up system config
    Options:
@@ -27,90 +29,11 @@ function usage {
    exit 0
 }
 
-function setup_vim {
-   echo "installing vim plugins"
-   ln -s ~/.vim/.vimrc ~/.vimrc
-   # install pathogen
-   git clone https://github.com/tpope/vim-pathogen.git
-   mv vim-pathogen/autoload ./
-   mkdir -p bundle
-   # install vim-plug
-   curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-   # To install plugins run PlugInstall command in vim command mode
-}
-
-function setup_keys {
-   echo "installing ssh keys"
-   mkdir -p $HOME/.ssh
-   unpack_secrets || {
-      echo "Hint: password is c*********9"
-      exit 1
-   }
-   mv $SECRETS_TMP_DIR/id_ecdsa $HOME/.ssh/
-   chmod 600 $HOME/.ssh/id_ecdsa
-	ssh-keygen -f $HOME/.ssh/id_ecdsa -y > $HOME/.ssh/id_ecdsa.pub
-   pushd $HOME/.ssh
-   cat id_ecdsa.pub >> authorized_keys
-   popd
-}
-
-function setup_git {
-   cat <<<"
-[include]
-path = `pwd`/gitconfig
-" >> $HOME/.gitconfig
-   git remote rm origin
-   git remote add origin git@github.com:avida/.vim.git
-}
-
-function setup_tools {
-   echo 'source "$HOME/.vim/bashrc"' >> $HOME/.bashrc
-   which zsh && {
-      sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-      echo 'source "$HOME/.vim/bashrc"' >> $HOME/.zshrc
-   }
-   ln -sf ~/.vim/tmux.conf ~/.tmux.conf
-}
-
-function install_docker {
-   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-   echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(. /etc/os-release; echo "$UBUNTU_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker_ce.list
-   sudo bash -c "$PACKAGE_MGR docker-ce docker-ce-cli containerd.io"
-   sudo usermod -aG docker `id -un`
-}
-
-function install_docker_compose {
-   sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-   sudo chmod +x /usr/local/bin/docker-compose
-}
-
-function install_pyenv {
-   sudo bash -c "$PACKAGE_MGR $PYENV_PACKAGES"
-   curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
-}
-
-function base_install {
-   echo "Installing base packages"
-   sudo bash -c "$PACKAGE_MGR $PACKAGE_LIST"
-   sudo pip3 install $PYTHON_PACKAGE
-   #install and config fuzzy finder
-   git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
-   $HOME/.fzf/install --all
-}
-
-function raspi_install {
-   base_install
-   echo "Installing python packages"
-   pip3 install $PIP_RASPI
-   echo "Installin application from linux repository"
-   sudo bash -c "$PACKAGE_MGR $PI_PACKAGE_LIST"
-   echo "Installing pynrf24 lib"
-   git clone https://github.com/jpbarraca/pynrf24.git pynrf24
-   pushd pynrf24
-   python3 setup.py install
-   popd
-   rm -rf pynrf24
-}
+LIST_OF_ACTIONS=`ls actions | sed s/.sh//`
+for ACTION in $LIST_OF_ACTIONS
+do
+   source $ACTIONS_DIR/$ACTION.sh
+done
 
 function unpack_secrets {
    gpg -d $SECRETS_ENC_FN | tar xf -
@@ -120,60 +43,12 @@ function pack_secrets {
    tar cf - $SECRETS_TMP_DIR/ | gpg --symmetric -o $SECRETS_ENC_FN
 }
 
-function install_node {
-   curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
-   sudo apt-get install -y nodejs
-}
-
-function install_neovim {
-   wget https://github.com/neovim/neovim/releases/download/v0.6.0/nvim.appimage
-   chmod +x nvim.appimage
-   ./nvim.appimage --appimage-extract
-   pushd squashfs-root
-   sudo cp -r usr /
-   popd
-   rm -r nvim.appimage squashfs-root
-   mkdir -p $HOME/.config/nvim/
-
-   ln -sf $HOME/.vim/init.vim ~/.config/nvim/init.vim
-}
-
-function install_alacritty {
-   sudo bash -c "$PACKAGE_MGR cargo cmake libfontconfig-dev libxcb1-dev libxcb-shape0-dev libxcb-xfixes0-dev"
-   cargo install alacritty
-}
-
 function process_actions {
    for action in ${ACTIONS[@]}
    do
       case $action in
-      raspi|pi)
-         echo this is paspi
-         raspi_install
-      ;;
-      base)
-         base_install
-      ;;
-      config)
-         setup_keys
-         setup_vim
-         setup_git
-         setup_tools
-      ;;
-      docker)
-         install_docker
-      ;;
-      docker-compose)
-         install_docker_compose
-      ;;
-      pyenv)
-         install_pyenv
-      ;;
-      node)
-         install_node
-      ;;
       pack-secrets)
-         pack_secrets
+k        pack_secrets
       ;;
       unpack-secrets)
          unpack_secrets
@@ -182,14 +57,8 @@ function process_actions {
          unpack_secrets
          pack_secrets
       ;;
-      neovim)
-         install_neovim
-      ;;
-      alacritty)
-         install_alacritty
-      ;;
       *)
-         echo "Unknown action $action"
+         setup_$action
       ;;
       esac
    done
@@ -203,7 +72,7 @@ function main {
          usage
       ;;
       a)
-         ACTIONS+=($OPTARG)
+         ACTIONS+=(${OPTARG[@]})
       ;;
       *)
          usage

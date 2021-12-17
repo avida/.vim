@@ -34,3 +34,5 @@ alias cov='coverage run -m pytest -s unit_tests && coverage  html --omit="*/.pye
 alias lab="cd ~/jupyter;pyenv activate 38;jupyter-lab"
 alias git="SKIP=mypy git"
 alias v=nvim
+
+source /home/dima/.vim/deploy-completions.bash
