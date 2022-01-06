@@ -69,6 +69,7 @@ Plug 'garbas/vim-snipmate'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'yggdroot/indentline'
+Plug 'tpope/vim-fugitive'
 
 Plug 'mileszs/ack.vim'
 Plug 'mg979/vim-visual-multi'

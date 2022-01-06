@@ -6,7 +6,7 @@ _generate_actions_completion() {
 }
 
 _do_completions(){
-   if [ ${COMP_WORDS[-1]} == "-a" ]
+   if [ "${COMP_WORDS[-1]}" == "-a" ]
    then
       _generate_actions_completion
    else

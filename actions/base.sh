@@ -1,5 +1,5 @@
 
-function setup_base{
+function setup_base {
    echo "Installing base packages"
    sudo bash -c "$PACKAGE_MGR $PACKAGE_LIST"
    sudo pip3 install $PYTHON_PACKAGE
