@@ -14,3 +14,7 @@ pyenv install 3.7.4
 pyenv virtualenv 3.7.4 37
 pyenv activate 37
 ```
+Make zsh default shell:
+```
+chsh -s $(which zsh)
+```
