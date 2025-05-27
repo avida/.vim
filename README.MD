@@ -16,6 +16,17 @@ pyenv install 3.7.4
 pyenv virtualenv 3.7.4 37
 pyenv activate 37
 ```
+To install jupiter:
+```
+pip install notebook
+jupyter notebook
+```
+Add js kernel to jupiter
+```
+npm install -g ijavascript
+ijsinstall
+
+```
 Make zsh default shell:
 ```
 chsh -s $(which zsh)
