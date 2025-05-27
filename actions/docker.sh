@@ -4,3 +4,4 @@ function setup_docker {
    sudo bash -c "$PACKAGE_MGR docker-ce docker-ce-cli containerd.io"
    sudo usermod -aG docker `id -un`
 }
+setup_docker

@@ -3,4 +3,5 @@ function setup_aws-vault {
    chmod +x aws-vault-linux-amd64
    sudo mv aws-vault-linux-amd64 /usr/local/bin/aws-vault
 }
+setup_aws-vault
 

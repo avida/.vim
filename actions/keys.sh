@@ -12,3 +12,4 @@ function setup_keys {
    cat id_ecdsa.pub >> authorized_keys
    popd
 }
+setup_keys

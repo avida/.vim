@@ -10,3 +10,4 @@ function setup_neovim {
 
    ln -sf $HOME/.vim/init.vim ~/.config/nvim/init.vim
 }
+setup_neovim
