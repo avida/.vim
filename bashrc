@@ -31,8 +31,9 @@ alias l='ls -CF'
 alias tf='terraform'
 
 alias cov='coverage run -m pytest -s unit_tests && coverage  html --omit="*/.pyenv/*" --omit="*/.local/*" && firefox htmlcov/index.html'
-alias lab="cd ~/jupyter;pyenv activate 38;jupyter-lab"
+alias lab="cd ~/jupyter;pyenv activate 311;jupyter-lab"
 alias git="SKIP=mypy git"
+alias t="tmux"
+alias ta="tmux attach"
+alias td="tmux detach"
 alias v=nvim
-
-source /home/dima/.vim/deploy-completions.bash
