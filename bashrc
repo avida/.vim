@@ -36,4 +36,5 @@ alias git="SKIP=mypy git"
 alias t="tmux"
 alias ta="tmux attach"
 alias td="tmux detach"
+alias sup="sudo apt update && sudo apt upgrade && sudo apt autoremove"
 alias v=nvim
