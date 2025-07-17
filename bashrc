@@ -37,4 +37,6 @@ alias t="tmux"
 alias ta="tmux attach"
 alias td="tmux detach"
 alias sup="sudo apt update && sudo apt upgrade && sudo apt autoremove"
+alias i="sudo apt install"
+alias pi="pip install"
 alias v=nvim
