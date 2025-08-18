@@ -10,6 +10,9 @@ test `basename $SHELL` = "zsh" && {
    export DISABLE_UNTRACKED_FILES_DIRTY="true"
    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 }
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
