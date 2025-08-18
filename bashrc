@@ -18,6 +18,7 @@ export PATH="$HOME/.pyenv/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$GOPATH:$PATH"
 export GOPATH="$HOME/go/bin"
+source $HOME/.local/bin/env
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
